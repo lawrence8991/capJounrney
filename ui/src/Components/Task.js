@@ -2,7 +2,7 @@ import { Button, Checkbox, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import React, { useState } from "react";
-import { UpdateTaskForm } from "./UpdateTaskForm";
+import { UpdateTaskForm } from "./UpdateTaskForm.js";
 import classnames from "classnames";
 import axios from "axios";
 import { API_URL } from "../utils";
