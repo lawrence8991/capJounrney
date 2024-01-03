@@ -1,44 +1,55 @@
-import {Dialog, DialogTitle, TextField, Button } from '@mui/material';
+import React, { useState } from "react";
+import { Button, Dialog, DialogTitle, TextField } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
-import { useState, React } from 'react';
-import axios from 'axios';
+import axios from "axios";
+import { API_URL } from "../utils";
 
+export const UpdateTaskForm = ({
+  fetchTasks,
+  isDialogOpen,
+  setIsDialogOpen,
+  task,
+}) => {
+  const { id, completed } = task;
+  const [taskName, setTaskName] = useState("");
 
-export const UpdateTaskForm = ({ fetchTasks, isDialogOpen, setIsDialogOpen, task }) => {
-const {id, completed} = task; 
-const [taskName, setTaskName] = useState(""); 
-
-
-const handleUpdateTask = async () => {
+  const handleUpdateTaskName = async () => {
     try {
-        await axios.put(API_URL, {id, name: taskName, completed});
+      await axios.put(API_URL, {
+        id,
+        name: taskName,
+        completed,
+      });
 
-    await fetchTasks();
-    setTaskName("");
-     } catch (error) {
-      console.log("error updating task:", {error});
-  }
-    setIsDialogOpen(false);
+      await fetchTasks();
 
-  return( 
-  <Dialog open={isDialogOpen}>
-    <DialogTitle>Edit Task</DialogTitle>
-    <div className="dialog">
-        <TextField 
-        size='small' 
-        label='task' 
-        variant='outlined'
-        onChange={(e) => setTaskName(e.target.value)}
+      setTaskName("");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return (
+    <Dialog open={isDialogOpen}>
+      <DialogTitle>Edit Task</DialogTitle>
+      <div className="dialog">
+        <TextField
+          size="small"
+          label="Task"
+          variant="outlined"
+          onChange={(e) => setTaskName(e.target.value)}
         />
-        <Button 
-        variant="contained" 
-        onClick={ async () => {
-          handleUpdateTask();
+        <Button
+          variant="contained"
+          onClick={async () => {
+            await handleUpdateTaskName();
+            
             setIsDialogOpen(false);
-            }}>
-           <CheckIcon></CheckIcon>     
+          }}
+        >
+          <CheckIcon />
         </Button>
-        </div>
-  </Dialog> 
+      </div>
+    </Dialog>
   );
-}};
+};
