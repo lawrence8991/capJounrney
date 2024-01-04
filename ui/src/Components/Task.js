@@ -62,3 +62,5 @@ export const Task = ({ task, fetchTasks }) => {
     </div>
   );
 };
+
+export default Task

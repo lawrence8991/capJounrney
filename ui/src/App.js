@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import  AddTaskForm from "./components/AddTaskForm.js";
-import { Task } from "./components/Task.js";
+import Task from "./components/Task.js";
 import axios from "axios";
 import { API_URL } from "./utils";
 
